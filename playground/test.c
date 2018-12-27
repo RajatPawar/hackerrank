@@ -2,6 +2,11 @@
 
 int glob;
 
+int somea() {
+    double some();
+    return (int) some();
+}
+
 int main() {
     void *ptr;
     int *ptri;
