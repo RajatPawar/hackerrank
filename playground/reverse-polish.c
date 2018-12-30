@@ -87,7 +87,7 @@ int main() {
 
 // get next operator or operand
 int gettok(char op[]) {
-    
+    static char unchar; 
     char c;
     int i = 0;
     int negative = NO;
@@ -142,7 +142,7 @@ int gettok(char op[]) {
     printf("\n%s\n", op);
 
     if(c != EOF) // it is not a number, something else that we need to put back on the buffer to make it available to be processed again
-        rungetchar(c);
+        unchar = c;
     return NUMBER;
 }
 
