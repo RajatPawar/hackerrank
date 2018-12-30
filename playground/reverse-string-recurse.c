@@ -2,7 +2,7 @@
 
 void reverse(char *arr, int from, int to) {
     
-    if(from > to) return;
+   // if(from > to) return;
     
     char temp = arr[from];
     arr[from] = arr[to];
@@ -14,6 +14,6 @@ void reverse(char *arr, int from, int to) {
 int main() {
     char arr[] = "This";
     reverse(arr, 0, sizeof(arr) - 2); // Subtracting delimiter and 1th index
-    printf("\n%s\n", arr, sizeof(test), sizeof(a));
+    printf("\n%s\n", arr);
     return 0;
 }
