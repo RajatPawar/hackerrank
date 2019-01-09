@@ -49,6 +49,7 @@ int getword(char *word, int limit) {
          }
      }
      *word = '\0';
+     printf("\nDEBUG: Returning %s", word);
      return word[0];
 }
 
@@ -71,7 +72,7 @@ int istypedef(char *word) {
 
 struct tnode {
     char *words[MAX_SAME_VARS];
-    int word_index = 0;
+    int word_index;
     struct tnode *left;
     struct tnode *right;
 } *tree;
@@ -86,16 +87,18 @@ void taddnode(struct tnode *t, char *word, int len) {
         t->left = NULL;
         t->right = NULL;
         t->word_index = 0;
-        (*t).words[word_index] = word;
+        (*t).words[t->word_index] = word;
     }
     else {
-        if(strsub(t->words[0], word) == INT_MIN) {
-
+        if(strsub(t->words[0], word, COMMON_CHARS) == INT_MIN) {
+            taddnode(t->left, word, len);
         }
-        else if(strsub(t->words[0], word) == INT_MAX) {
-
+        else if(strsub(t->words[0], word, COMMON_CHARS) == INT_MAX) {
+            taddnode(t->right, word, len);
         }
         else {
+            if(t->word_index > MAX_SAME_VARS) printf("\nOverflow");
+            else t->words[t->word_index++] = word;
             // Add to words list
         }
         
@@ -107,7 +110,8 @@ void traverse(char *buff, int len) {
     char wordbuff[MAX_WORD_SIZE];
     int store_next = 0;
 
-    while(getword(wordbuff, MAX_WORD_SIZE) != EOF) {
+    while(getword(wordbuff, MAX_WORD_SIZE) != '\n') {
+        printf("\nCurrent word: %s", wordbuff);
         if(istypedef(wordbuff))
             store_next = YES;
 
@@ -118,6 +122,15 @@ void traverse(char *buff, int len) {
 
         else continue;
     } 
+}
+
+void tprint(struct tnode *t) {
+    if(t != NULL) {
+        tprint(t->left);
+        for(int i = 0; i < t->word_index; i++) 
+            printf(" %s ", t->words[i]);
+        tprint(t->right);
+    }
 }
 
 int main(int argc, char *argv[]) {
@@ -134,11 +147,14 @@ int main(int argc, char *argv[]) {
 
     if(prog != NULL) {
         printf("\nOpened file: %s\nCommon: %d\n", filename, COMMON_CHARS);    
-    }
 
-    while(fgets(buffer, MAX_CHAR, prog) != NULL) {
-        traverse(buffer, MAX_CHAR);
-    } 
+        while(fgets(buffer, MAX_CHAR, prog) != NULL) {
+            printf("\nTraversing: %s", buffer);
+            traverse(buffer, MAX_CHAR);
+        } 
+        
+        tprint(tree);
+    }
 
     return 0;
 }

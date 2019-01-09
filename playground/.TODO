@@ -1,0 +1,2 @@
+# You have traverse and getword oriented towards stdin but we are reading from a file handle
+
