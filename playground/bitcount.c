@@ -2,7 +2,7 @@
 
 int bitcount(unsigned x) {
     int set = 0;
-
+    int bitcounttest = 0;
     // Until the shift or AND results a 0
     while(x) {
         // Deletes right most set bit (increment and shift to right)
