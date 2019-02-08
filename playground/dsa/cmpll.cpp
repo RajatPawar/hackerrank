@@ -31,9 +31,9 @@ class LinkedList {
 
     void add_node(g_datatype);
     Node<g_datatype>* find_node(g_datatype);
-    int size();
     void print_list();
-    void delete_node_first();
+    void delete_node(g_datatype);
+    bool compare(LinkedList<char> *ll);
 };
 
 template <class g_datatype>
@@ -79,33 +79,26 @@ void LinkedList<g_datatype> :: print_list() {
 }
 
 template <class g_datatype>
-int LinkedList<g_datatype> :: size() {
-    static Node<g_datatype> *itr = head;
-    if((itr = itr->get_next()) == nullptr) return 1;
-    else return 1 + LinkedList<g_datatype>::size();
-}
-
-template <class g_datatype>
-void LinkedList<g_datatype> :: delete_node_first() {
-    Node<g_datatype> *itr = this->head;
-    head->set_next(head->get_next());
-    //delete itr;
+bool LinkedList<g_datatype> :: compare(LinkedList<char> *ll) {
+    Node<g_datatype> *itr_one = this->head, *itr_two = ll->head;
+    while(itr_one && itr_two) {
+       if(*itr_one != *itr_two) return false;
+       itr_one = this->get_next();
+       itr_two = itr_two->get_next();
+    }
+    return ((itr_one == itr_two) == nullptr) ? true : false;
 }
 
 int main() {
 
-    LinkedList<string> ll;
+    LinkedList<char> ll, ll_two;
+    ll.add_node('a');
+    ll.add_node('b');
+    ll.add_node('c');
+    ll.add_node('z');
 
-    ll.add_node("sparta!");
-    ll.add_node("is");
-    ll.add_node("This");
-    ll.add_node("is");
-    ll.add_node("This");
-    ll.add_node("is");
-    ll.add_node("This");
-    ll.print_list();
-    printf("\nSIZE: %d\n", ll.size());
-    //ll.delete_node_first(); 
-    printf("\nSIZE: %d\n", ll.size());
+    ll_two.add_node('a');
+    printf("\nOP: %d\n", ll.compare(&ll_two));
+    
     return 0;
 }
