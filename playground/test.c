@@ -1,23 +1,15 @@
 #include <stdio.h>
 
-int glob;
-int test[] = {12, 3, 3, 3,1,1};
-
-long a = 10L * 2512L * 12421L * 1251L;
+int fun(int *p, int c) {
+    printf("\nCall fun(%d, %d)", *p, c);
+    c = c - 1;
+    if(c == 0) return 1;
+    *p = *p + 1;
+    return (*p * fun(p, c));
+}
 
 int main() {
-    /*void *ptr;
-    int *ptri;
-    printf("Sizeof: usignedint: %d, FLOAT: %d, LONG DOUBLE: %d, VOID: %d, VOIDPTR: %d, INTPTR: %d, LONGINT: %d, SHORTINT: %d, INT: %d, LONG: %d, DOUBLE: %d, SHORT: %d CHAR: %d", sizeof(unsigned int), sizeof(float), sizeof(long double), sizeof(void), sizeof(ptr), sizeof(*ptri), sizeof(long int), sizeof(short int), sizeof(int), sizeof(long),sizeof(double), sizeof(short), sizeof(char));
-
-    int local = sizeof(test);
-    const int glob = 5;
-    char a = 'X';
-    printf("%d", local);
-    //printf("\n\nGlob: %d, local: %d, char: %c, intchar: %d, octal: %d", glob, local, a, a, sizeof(0177));
-*/
-    char hello[10];
-    fgets(hello, 10, stdin);
-    printf("%s", hello);
+    int p = 5, c = 5;
+    printf("\n%d\n", fun(&p, c));
     return 0;
 }

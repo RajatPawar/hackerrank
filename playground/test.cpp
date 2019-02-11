@@ -1,13 +1,15 @@
 #include <iostream>
-#include <algorithm>    // std::next_permutation, std::sort
+
+int fun(int &x, int c) {
+    printf("\nCall f(%d, %d)", x, c);
+    c = c - 1;
+    if(!c) return 1;
+    x = x + 1;
+    return fun(x, c) * x;
+}
 
 int main () {
-  int myints[] = {5, 9, 8, 3, 0, 1, 4};
-  while(std::next_permutation(myints, myints + 7)) {
-  for(int i = 0; i < 7; i++) {
-      std::cout<<myints[i]<<" ";
-  }
-  std::cout<<std::endl;
-  }
-  return 0;
+    int x = 5;
+    std::cout<<std::endl<<fun(x, x);
+    return 0;
 }
