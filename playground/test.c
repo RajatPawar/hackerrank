@@ -8,8 +8,12 @@ int fun(int *p, int c) {
     return (*p * fun(p, c));
 }
 
+
 int main() {
     int p = 5, c = 5;
-    printf("\n%d\n", fun(&p, c));
+    extern int i;
+    i = 20;
+    printf("%d", i);
     return 0;
 }
+
