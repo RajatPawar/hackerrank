@@ -1,0 +1,39 @@
+# .bash_profile
+ 
+ # Get the aliases and functions
+ if [ -f ~/.bashrc ]; then
+         . ~/.bashrc
+ fi
+ 
+ # User specific environment and startup programs
+ 
+ run() {
+     last=`ls -trh | grep -E -v 'a.out' | tail -1`
+     clear
+     gcc $last
+     ./a.out
+ }
+ 
+ op() {
+     last=`ls -trh | grep -E -v 'a.out' | tail -1`
+     vim $last
+ }
+ 
+ PATH=$PATH:$HOME/bin
+ 
+ alias hr='cd ~/int/hackerrank/interview-prep'
+ alias play='cd ~/int/playground'
+ alias vi=vim
+ alias cc='killall pboard'
+ alias ut='sshpass -p helloRajat! ssh -R 52698:localhost:52698 rajat@10.136.76.24'
+ alias pulsify='sshpass -p Puls!fy ssh root@10.136.103.80'
+ alias utedit='ssh -R 52698:localhost:52698 rajat@10.136.76.24'
+ alias kedit='ssh -R 52698:localhost:52698 karma@10.136.102.146'
+ alias puledit='ssh -R 52698:localhost:52698 root@10.136.103.80'
+ alias diamond='sshpass -p diamondRajat! ssh rajat.pawar@diamond.corp.nutanix.com'
+ alias peektar='tar --exclude="*/*" -tf'
+ export PATH
+ 
+ export PS1="\[\033[35m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[32;m\]\w\[\033[m\]\$ "
+ export CLICOLOR=1
+ export LSCOLORS=ExFxBxDxCxegedabagacad
