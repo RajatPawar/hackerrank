@@ -154,6 +154,26 @@ void* realloc(void* ptr, size_t size) {
    return new_memory;
 }
 
+/* Calloc function - init to 0 the new mem */
+void* calloc(size_t elems, size_t elem_size) {
+    if(elems <= 0 || elem_size <= 0) return NULL;
+    
+    // How many bytes do I need to allocate?
+    size_t to_alloc_bytes = elems * elem_size;
+    
+    void *mem = malloc(to_alloc_bytes);
+    
+    // Failure to get memory
+    if(!mem) 
+        return NULL;
+
+    size_t init_bytes_count = to_alloc_bytes;
+    while(init_bytes_count--)
+        *((char*) mem++) = 0;
+    
+    return (mem -= to_alloc_bytes);
+}
+
 int main() {
     int *test_int = malloc(sizeof(int));
     char *test_char_arr = malloc(6);
@@ -169,6 +189,18 @@ int main() {
     test_char_arr = "Hello world!";
     printf("\nRealloc test: %s\n @ %p\n & meta starts from %p\n", test_char_arr, test_char_arr, get_metadata_addr_from_block(test_char_arr));
     free(test_char_arr);
+
+    // Let's see if that test_int space that we freed is being taken or not
+    test_int = malloc(sizeof(int));
+    *test_int = 10;
+    printf("\nTest: %d\n @ %p\n & meta starts from %p", *test_int, test_int, get_metadata_addr_from_block(test_int));
+
+
+    test_int = calloc(5, sizeof(int));
+    printf("\n\nTest: %d\n @ %p\n & meta starts from %p", *test_int, test_int, get_metadata_addr_from_block(test_int));
+    for(int i = 0; i < 5; i++)
+        printf("\nCalloc test: idx %d: val: %d", i, test_int[i]);
+    free(test_int);
 
     return 0;
 }
