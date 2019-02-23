@@ -55,11 +55,7 @@ int alternate(char* s) {
   }
   
   char *tocpy = (char *) malloc(1001 * sizeof(char));
-<<<<<<< HEAD
   int tcpy = 0, biggest = 0;
-=======
-  int tcpy = 0, biggest = -1;
->>>>>>> a49f7e1556d8ff6cce670d97a4232b3b9477ada5
 
   for (int firstchar = 0; firstchar < 26; firstchar++) {
     for (int secchar = 0; secchar < 26; secchar++) {
