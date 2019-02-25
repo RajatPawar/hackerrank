@@ -27,6 +27,9 @@ void separateNumbers(char* s) {
         min_number = number;
         idx = test_till;
 
+        // There seems to be some problem with detecting 0 in the beginning 
+        // Another problem is when the entire string is detected as a valid number
+
         while(idx < len) {
             if(strncmp(s, test_string, idx)) break;
 
@@ -37,7 +40,7 @@ void separateNumbers(char* s) {
             while(from < to) test_string[from] = number_string[from - idx], from++;
             idx += strlen(number_string);
         }
-        if(idx == len) {
+        if(idx == len && strlen(number_string) != len) {
           printf("YES %d\n", min_number);
           return;
         }
