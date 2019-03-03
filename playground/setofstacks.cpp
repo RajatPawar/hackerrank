@@ -6,7 +6,7 @@ class SetStacks {
     int topple_limit, top, **stack_arr;
     public:
 
-    SetStacks(int topple) : topple_limit()
+    SetStacks(int topple) : topple_limit(topple)
 }
 
 
