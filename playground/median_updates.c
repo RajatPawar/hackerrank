@@ -126,14 +126,16 @@
        printf("Wrong!\n");
      else {
        if (valid_elems % 2 || valid_elems == 1) { // ODD
-         printf("%0.0f\n", root->data);
+         printf("%0.0lf\n", root->data);
        } else if (!(valid_elems % 2) && valid_elems > 1) {
-         float result;
+         double result;
          if (!root->right && root->left)
-           result = ((float)root->data + (float)root->left->data) / 2;
+           result = (root->data + root->left->data) / 2.0f;
          if (!root->left && root->right)
-           result = ((float)root->data + (float)root->right->data) / 2;
-         printf("%0.1f\n", result);
+           result = (root->data + root->right->data) / 2.0f;
+         //if(result % 1 != 0) printf("%0.1lf\n", result);
+         //else
+         printf("%0.0lf\n", result);
        }
      }
      valid_elems = 0;
