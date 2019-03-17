@@ -81,9 +81,10 @@ int main(int argc, char* argv[]) {
 
     switch(choice) {
         case 1: {
+            int bytes_read = 0;
             // Get server dir info and print here
-            while(readbytes(socket_conn, 255, buffer))
-                printf("%s", buffer);
+            while((bytes_read = readbytes(socket_conn, 255, buffer)))
+                printf("(%d) %s", bytes_read, buffer);
             break;
         }
         case 2: {

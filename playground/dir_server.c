@@ -114,7 +114,7 @@ void handle(int client_socket_handle) {
                 exit(1);
             }
 
-            int counter = 0;
+            int counter = 0, written_bytes = 0;
             while((dir_entry_ptr = readdir(dir_ptr)) != NULL) {
                 sprintf(buffer, "\n%d. %s (%s)", ++counter, dir_entry_ptr->d_name, get_ftype(dir_entry_ptr->d_type));
                 if(write(client_socket_handle, buffer, sizeof(buffer)) < 0) {
